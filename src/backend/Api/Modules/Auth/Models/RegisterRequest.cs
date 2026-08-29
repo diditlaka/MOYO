@@ -1,0 +1,9 @@
+namespace Api.Modules.Auth.Models;
+
+// This is what the frontend sends when a new user registers
+public class RegisterRequest
+{
+    public string Name { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
+    public string Password { get; set; } = string.Empty;
+}
