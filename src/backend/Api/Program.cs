@@ -14,7 +14,14 @@ var builder = WebApplication.CreateBuilder(args);
 // ─────────────────────────────────────────────
 
 // Controllers — this tells the app we have API controllers
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        // This tells the JSON serializer to handle circular references
+        // instead of going into an infinite loop
+        options.JsonSerializerOptions.ReferenceHandler = 
+            System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+    });
 
 // Database — connect to SQL Server using the connection string in appsettings.json
 // AppDbContext is our bridge between C# and the database
