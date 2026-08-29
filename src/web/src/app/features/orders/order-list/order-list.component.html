@@ -1,0 +1,35 @@
+<div class="page">
+  <div class="page-header">
+    <h1>My Orders</h1>
+    <p>Track all your orders in one place</p>
+    <a routerLink="/orders/new" class="new-order-btn">+ Place New Order</a>
+  </div>
+
+  <div class="loading" *ngIf="isLoading">Loading orders...</div>
+  <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+  <div class="orders-list" *ngIf="!isLoading && !errorMessage">
+
+    <div class="order-card" *ngFor="let order of orders">
+      <div class="order-header">
+        <span class="order-id">Order #{{ order.orderId }}</span>
+        <span class="status" [ngClass]="getStatusClass(order.status)">
+          {{ order.status }}
+        </span>
+      </div>
+      <div class="order-body">
+        <p class="product-name">{{ order.product?.name }}</p>
+        <p class="order-detail">Quantity: {{ order.quantity }}</p>
+        <p class="order-detail">
+          Ordered: {{ order.orderDate | date:'dd MMM yyyy, HH:mm' }}
+        </p>
+      </div>
+    </div>
+
+    <div class="empty" *ngIf="orders.length === 0">
+      You haven't placed any orders yet.
+      <a routerLink="/orders/new">Place your first order</a>
+    </div>
+
+  </div>
+</div>

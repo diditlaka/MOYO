@@ -1,0 +1,79 @@
+<div class="sidebar">
+
+  <!-- Brand -->
+  <div class="sidebar-brand">
+    <div class="brand-mark">M</div>
+
+    <div class="brand-text">
+      <span class="brand-name">MOYO</span>
+      <span class="brand-subtitle">Client Portal</span>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="sidebar-nav">
+
+    <a
+      routerLink="/products"
+      routerLinkActive="active"
+      class="nav-item"
+    >
+      <span class="nav-icon">▦</span>
+      <span>Products</span>
+    </a>
+
+    <a
+      routerLink="/orders"
+      routerLinkActive="active"
+      class="nav-item"
+    >
+      <span class="nav-icon">□</span>
+      <span>My Orders</span>
+    </a>
+
+  </nav>
+
+  <!-- Profile -->
+  <div class="sidebar-bottom">
+
+    <!-- Profile popup -->
+    <div
+      class="profile-menu"
+      *ngIf="profileOpen"
+    >
+      <div class="profile-details">
+        <strong>{{ userName }}</strong>
+        <span>{{ userEmail }}</span>
+      </div>
+
+      <button
+        class="logout-button"
+        (click)="logout()"
+      >
+        <span>↪</span>
+        Logout
+      </button>
+    </div>
+
+    <!-- Profile button -->
+    <button
+      class="profile-button"
+      (click)="toggleProfile()"
+    >
+      <div class="avatar">
+        {{ userName.charAt(0).toUpperCase() }}
+      </div>
+
+      <div class="profile-info">
+        <strong>{{ userName }}</strong>
+        <span>Client</span>
+      </div>
+
+      <span class="profile-arrow">
+        {{ profileOpen ? '⌃' : '⌄' }}
+      </span>
+    </button>
+
+  </div>
+
+</div>

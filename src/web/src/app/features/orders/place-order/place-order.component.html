@@ -1,0 +1,71 @@
+<div class="page">
+  <div class="page-header">
+    <a routerLink="/products" class="back-link">← Back to Products</a>
+    <h1>Place Order</h1>
+    <p>Review your order details before confirming</p>
+  </div>
+
+  <div class="order-grid">
+
+    <!-- Left: Product Summary -->
+    <div class="card product-card">
+      <h3>Product Summary</h3>
+      <div class="product-info">
+        <div class="product-name">{{ productName }}</div>
+        <div class="product-price">R{{ price.toFixed(2) }}</div>
+      </div>
+      <div class="divider"></div>
+      <div class="form-group">
+        <label for="quantity">Quantity</label>
+        <input
+          id="quantity"
+          type="number"
+          [(ngModel)]="quantity"
+          name="quantity"
+          min="1"
+          max="100"
+          required
+        />
+      </div>
+    </div>
+
+    <!-- Right: Order Summary -->
+    <div class="card summary-card">
+      <h3>Order Summary</h3>
+
+      <div class="summary-row">
+        <span>Unit Price</span>
+        <span>R{{ price.toFixed(2) }}</span>
+      </div>
+      <div class="summary-row">
+        <span>Quantity</span>
+        <span>{{ quantity }}</span>
+      </div>
+      <div class="divider"></div>
+      <div class="summary-row total-row">
+        <span>Total</span>
+        <span class="total-amount">R{{ total.toFixed(2) }}</span>
+      </div>
+
+      <div class="success" *ngIf="successMessage">
+        ✓ {{ successMessage }}
+      </div>
+      <div class="error" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <button
+        (click)="onSubmit()"
+        [disabled]="isLoading || !!successMessage"
+        class="confirm-btn">
+        {{ isLoading ? 'Placing order...' : 'Confirm Order' }}
+      </button>
+
+      <p class="terms">
+        By confirming, your order will be sent to our
+        Order Management System for processing.
+      </p>
+    </div>
+
+  </div>
+</div>

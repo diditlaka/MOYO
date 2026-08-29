@@ -1,0 +1,173 @@
+.page {
+  padding: 1rem 0;
+}
+
+.page-header {
+  margin-bottom: 2rem;
+}
+
+.back-link {
+  color: #00B4D8;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: inline-block;
+  margin-bottom: 1rem;
+  transition: color 0.2s;
+}
+
+.back-link:hover { color: #0077A8; }
+
+.page-header h1 {
+  margin: 0 0 0.25rem;
+  color: #111827;
+  font-size: 1.75rem;
+}
+
+.page-header p {
+  margin: 0;
+  color: #6b7280;
+}
+
+/* Two column grid — same pattern as products page */
+.order-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.75rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  border: 1.5px solid #f3f4f6;
+}
+
+.card h3 {
+  margin: 0 0 1.25rem;
+  color: #111827;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+/* Product card */
+.product-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.product-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.product-price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #00B4D8;
+}
+
+.divider {
+  height: 1.5px;
+  background: #f3f4f6;
+  margin: 1.25rem 0;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #374151;
+  font-size: 0.9rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #00B4D8;
+}
+
+/* Summary card */
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0;
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+.total-row {
+  color: #111827;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.total-amount {
+  font-size: 1.5rem;
+  color: #00B4D8;
+}
+
+.confirm-btn {
+  width: 100%;
+  padding: 0.9rem;
+  background: #00B4D8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  transition: background 0.2s;
+  letter-spacing: 0.02em;
+}
+
+.confirm-btn:hover:not(:disabled) { background: #0077A8; }
+.confirm-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.success {
+  background: #d1fae5;
+  color: #065f46;
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+.error {
+  background: #fef2f2;
+  color: #dc2626;
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.terms {
+  text-align: center;
+  color: #9ca3af;
+  font-size: 0.8rem;
+  margin-top: 1rem;
+  line-height: 1.5;
+}
+
+/* Responsive — stack on smaller screens */
+@media (max-width: 768px) {
+  .order-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,18 @@
+<nav class="navbar">
+  <div class="nav-container">
+    <a routerLink="/products" class="nav-brand">
+      <span class="brand-moyo">MOYO</span>
+      <span class="brand-portal">Client Portal</span>
+    </a>
+
+    <div class="nav-links" *ngIf="isLoggedIn">
+      <a routerLink="/products" routerLinkActive="active">Products</a>
+      <a routerLink="/orders" routerLinkActive="active">My Orders</a>
+    </div>
+
+    <div class="nav-user" *ngIf="isLoggedIn">
+      <span class="user-name">{{ userName }}</span>
+      <button (click)="logout()" class="logout-btn">Logout</button>
+    </div>
+  </div>
+</nav>

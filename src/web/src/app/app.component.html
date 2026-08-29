@@ -1,0 +1,5 @@
+<app-sidebar *ngIf="showSidebar"></app-sidebar>
+
+<main [class.with-sidebar]="showSidebar">
+  <router-outlet></router-outlet>
+</main>

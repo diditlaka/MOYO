@@ -1,0 +1,37 @@
+<div class="page">
+  <div class="page-header">
+    <h1>Browse Products</h1>
+    <p>Find what you need and place an order</p>
+  </div>
+
+  <!-- Loading state -->
+  <div class="loading" *ngIf="isLoading">Loading products...</div>
+
+  <!-- Error state -->
+  <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+  <!-- Products grid -->
+  <div class="products-grid" *ngIf="!isLoading && !errorMessage">
+
+    <!-- *ngFor is like .map() in React -->
+    <div class="product-card" *ngFor="let product of products">
+      <div class="product-category">{{ product.category }}</div>
+      <h3>{{ product.name }}</h3>
+      <p>{{ product.description }}</p>
+      <div class="product-footer">
+        <span class="price">R{{ product.price.toFixed(2) }}</span>
+        <a [routerLink]="['/orders/new']"
+           [queryParams]="{ productId: product.productId, productName: product.name, price: product.price }"
+           class="order-btn">
+          Order Now
+        </a>
+      </div>
+    </div>
+
+    <!-- Empty state -->
+    <div class="empty" *ngIf="products.length === 0">
+      No products available at the moment.
+    </div>
+
+  </div>
+</div>

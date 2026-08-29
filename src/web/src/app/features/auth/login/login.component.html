@@ -1,0 +1,52 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <h2>Welcome Back</h2>
+    <p class="subtitle">Sign in to your account</p>
+
+    <!-- ngSubmit fires when the form is submitted -->
+    <!-- This is like onSubmit in React -->
+    <form (ngSubmit)="onSubmit()">
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <!-- [(ngModel)] is two-way binding -->
+        <!-- When user types, email variable updates -->
+        <!-- When email variable changes, input updates -->
+        <!-- This is like value + onChange in React -->
+        <input
+          id="email"
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          placeholder="you@email.com"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          [(ngModel)]="password"
+          name="password"
+          placeholder="Your password"
+          required
+        />
+      </div>
+
+      <!-- Show error message if login fails -->
+      <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+      <button type="submit" [disabled]="isLoading">
+        <!-- Show different text while loading -->
+        {{ isLoading ? 'Signing in...' : 'Sign In' }}
+      </button>
+
+    </form>
+
+    <p class="switch-link">
+      Don't have an account? <a routerLink="/register">Register here</a>
+    </p>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class OrderService {
+  private apiUrl = 'http://localhost:5094/api/orders';
+
+  constructor(private http: HttpClient) {}
+
+  getMyOrders(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);
+  }
+
+  createOrder(productId: number, quantity: number): Observable<any> {
+    return this.http.post<any>(this.apiUrl, { productId, quantity });
+  }
+}
