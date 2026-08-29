@@ -27,21 +27,32 @@ public class OrderService : IOrderService
     // Place a new order for a client
     public async Task<Order> CreateOrderAsync(int clientId, CreateOrderRequest request)
     {
-        var order = new Order
-        {
-            ClientId = clientId,
-            ProductId = request.ProductId,
-            Quantity = request.Quantity,
-            Status = "Pending",
-            OrderDate = DateTime.UtcNow
-        };
+       if (request.Quantity <= 0)
+        throw new ArgumentException("Quantity must be greater than zero.");
 
-        _db.Orders.Add(order);
-        await _db.SaveChangesAsync();
+    var product = await _db.Products
+        .FirstOrDefaultAsync(p => p.ProductId == request.ProductId);
 
-        // Reload the order with the product details included
-        return await _db.Orders
-            .Include(o => o.Product)
-            .FirstAsync(o => o.OrderId == order.OrderId);
+    if (product == null)
+        throw new KeyNotFoundException("Product not found.");
+
+    if (!product.IsAvailable)
+        throw new InvalidOperationException("Product is currently unavailable.");
+
+    var order = new Order
+    {
+        ClientId = clientId,
+        ProductId = request.ProductId,
+        Quantity = request.Quantity,
+        Status = "Pending",
+        OrderDate = DateTime.UtcNow
+    };
+
+    _db.Orders.Add(order);
+    await _db.SaveChangesAsync();
+
+    return await _db.Orders
+        .Include(o => o.Product)
+        .FirstAsync(o => o.OrderId == order.OrderId);
     }
 }
