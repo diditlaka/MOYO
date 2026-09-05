@@ -51,11 +51,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngular", policy =>
     {
-        policy.WithOrigins(
-            "http://localhost:4200",
-            "https://spiffy-zabaione-940bfe.netlify.app"
-
-        )
+        policy.AllowAnyOrigin()
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
