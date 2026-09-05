@@ -9,10 +9,6 @@ using Api.Modules.Orders;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ─────────────────────────────────────────────
-// SERVICES
-// ─────────────────────────────────────────────
-
 // Controllers — this tells the app we have API controllers
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
@@ -55,7 +51,11 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngular", policy =>
     {
-        policy.WithOrigins("http://localhost:4200")
+        policy.WithOrigins(
+            "http://localhost:4200",
+            "https://spiffy-zabaione-940bfe.netlify.app"
+
+        )
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -66,10 +66,6 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
-
-// ─────────────────────────────────────────────
-// MIDDLEWARE PIPELINE
-// ─────────────────────────────────────────────
 
 var app = builder.Build();
 
