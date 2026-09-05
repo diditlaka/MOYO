@@ -27,7 +27,7 @@ interface AuthResponse {
 })
 export class AuthService {
   // The URL of our C# API
-  private apiUrl = 'http://localhost:5094/api/auth';
+  private apiUrl = 'https://moyo-ftg6h6cabjczexf7.southafricanorth-01.azurewebsites.net/api/auth';
 
   // BehaviorSubject tracks whether the user is logged in
   // Components can subscribe to this to react when login state changes
