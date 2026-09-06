@@ -45,17 +45,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization();
 
-// CORS — allows our Angular front end to talk to this API
-// Without this the browser would block the requests
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAngular", policy =>
-    {
-        policy.AllowAnyOrigin()
-              .AllowAnyHeader()
-              .AllowAnyMethod();
-    });
-});
+// Note: CORS is no longer needed — the Angular app is now served
+// from this same ASP.NET Core app (same origin), so the browser
+// never blocks requests between frontend and backend.
 
 // Our own services — this registers our business logic classes
 // AddScoped means a new instance is created per HTTP request
@@ -66,9 +58,11 @@ builder.Services.AddScoped<IOrderService, OrderService>();
 var app = builder.Build();
 
 // The order here matters — each request flows through these in order
-app.UseCors("AllowAngular");        // 1. Allow Angular requests
-app.UseAuthentication();             // 2. Check who the user is
-app.UseAuthorization();              // 3. Check what they're allowed to do
-app.MapControllers();                // 4. Route to the right controller
+app.UseDefaultFiles();               // 1. Serve index.html for / requests
+app.UseStaticFiles();                // 2. Serve the built Angular JS/CSS/assets
+app.UseAuthentication();             // 3. Check who the user is
+app.UseAuthorization();              // 4. Check what they're allowed to do
+app.MapControllers();                // 5. Route API calls to the right controller
+app.MapFallbackToFile("index.html"); // 6. Any non-API route → let Angular's router handle it
 
 app.Run();

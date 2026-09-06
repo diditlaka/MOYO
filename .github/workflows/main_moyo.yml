@@ -13,6 +13,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Angular dependencies
+        run: npm install
+        working-directory: src/web
+
+      - name: Build Angular app
+        run: npm run build -- --configuration production
+        working-directory: src/web
+
+      - name: Copy Angular build into backend wwwroot
+        run: |
+          mkdir -p src/backend/Api/wwwroot
+          cp -r src/web/dist/web/browser/* src/backend/Api/wwwroot/
+
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v4
         with:

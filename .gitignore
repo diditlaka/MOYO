@@ -5,12 +5,15 @@ obj/
 *.suo
 .vs/
 appsettings.Development.json
-appsettings.json
 
 # Node / Angular
 node_modules/
 dist/
 .angular/
+
+# Generated static files copied into the backend at build time
+src/backend/Api/wwwroot/*
+!src/backend/Api/wwwroot/.gitkeep
 
 # Environment
 .env
