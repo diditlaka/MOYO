@@ -1,0 +1,61 @@
+digraph ERD {
+    rankdir=LR;
+    fontname="Helvetica";
+    bgcolor="white";
+    node [fontname="Helvetica", fontsize=11, shape=plaintext];
+    edge [fontname="Helvetica", fontsize=10, color="#5A5A5A", dir=both, arrowhead=crow, arrowtail=none];
+
+    labelloc="t";
+    label="Client Portal — Entity Relationship Diagram";
+    fontsize=16;
+    fontname="Helvetica-Bold";
+
+    Client [label=<
+        <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" BGCOLOR="#EEEDFE" COLOR="#534AB7">
+            <TR><TD BGCOLOR="#CECBF6" ALIGN="CENTER"><B>Client</B></TD></TR>
+            <TR><TD ALIGN="LEFT">PK  ClientId  (int)</TD></TR>
+            <TR><TD ALIGN="LEFT">Name  (string)</TD></TR>
+            <TR><TD ALIGN="LEFT">Email  (string, unique)</TD></TR>
+            <TR><TD ALIGN="LEFT">PasswordHash  (string)</TD></TR>
+            <TR><TD ALIGN="LEFT">CreatedAt  (datetime)</TD></TR>
+        </TABLE>
+    >];
+
+    Order [label=<
+        <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" BGCOLOR="#E1F5EE" COLOR="#0F6E56">
+            <TR><TD BGCOLOR="#9FE1CB" ALIGN="CENTER"><B>Order</B></TD></TR>
+            <TR><TD ALIGN="LEFT">PK  OrderId  (int)</TD></TR>
+            <TR><TD ALIGN="LEFT">FK  ClientId  (int)</TD></TR>
+            <TR><TD ALIGN="LEFT">FK  ProductId  (int)</TD></TR>
+            <TR><TD ALIGN="LEFT">Quantity  (int)</TD></TR>
+            <TR><TD ALIGN="LEFT">Status  (string)</TD></TR>
+            <TR><TD ALIGN="LEFT">OrderDate  (datetime)</TD></TR>
+        </TABLE>
+    >];
+
+    Product [label=<
+        <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" BGCOLOR="#FAECE7" COLOR="#993C1D">
+            <TR><TD BGCOLOR="#F5C4B3" ALIGN="CENTER"><B>Product</B></TD></TR>
+            <TR><TD ALIGN="LEFT">PK  ProductId  (int)</TD></TR>
+            <TR><TD ALIGN="LEFT">Name  (string)</TD></TR>
+            <TR><TD ALIGN="LEFT">Description  (string)</TD></TR>
+            <TR><TD ALIGN="LEFT">Category  (string)</TD></TR>
+            <TR><TD ALIGN="LEFT">Price  (decimal)</TD></TR>
+            <TR><TD ALIGN="LEFT">IsAvailable  (bool)</TD></TR>
+        </TABLE>
+    >];
+
+    Vendor [label=<
+        <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" BGCOLOR="#F1EFE8" COLOR="#5F5E5A">
+            <TR><TD BGCOLOR="#D3D1C7" ALIGN="CENTER"><B>Vendor  [conceptual]</B></TD></TR>
+            <TR><TD ALIGN="LEFT">PK  VendorId  (int)</TD></TR>
+            <TR><TD ALIGN="LEFT">FK  ProductId  (int)</TD></TR>
+            <TR><TD ALIGN="LEFT">Price  (decimal)</TD></TR>
+            <TR><TD ALIGN="LEFT">StockQty  (int)</TD></TR>
+        </TABLE>
+    >];
+
+    Client -> Order [label="  1..N"];
+    Product -> Order [label="  1..N"];
+    Product -> Vendor [label="  1..N", style=dashed];
+}

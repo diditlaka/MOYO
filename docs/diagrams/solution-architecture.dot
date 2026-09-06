@@ -1,0 +1,66 @@
+digraph SolutionArchitecture {
+    rankdir=LR;
+    fontname="Helvetica";
+    bgcolor="white";
+    node [fontname="Helvetica", fontsize=11, shape=box, style="rounded,filled", margin="0.25,0.15"];
+    edge [fontname="Helvetica", fontsize=10, color="#5A5A5A"];
+
+    labelloc="t";
+    label="Online Order Solution — Entire System Architecture";
+    fontsize=16;
+    fontname="Helvetica-Bold";
+
+    Client [label="Client", shape=oval, fillcolor="#E6F1FB", color="#185FA5"];
+    Vendor [label="Vendor", shape=oval, fillcolor="#E6F1FB", color="#185FA5"];
+    Capturer [label="Product\nCapturer", shape=oval, fillcolor="#E6F1FB", color="#185FA5"];
+    Manager [label="Product\nManager", shape=oval, fillcolor="#E6F1FB", color="#185FA5"];
+
+    subgraph cluster_cp {
+        label="Client Portal  [BUILT — this repo]";
+        style="rounded,filled";
+        fillcolor="#E1F5EE";
+        color="#0F6E56";
+        fontsize=12;
+        fontname="Helvetica-Bold";
+        CP [label="Angular + ASP.NET Core\n(Auth, Products, Orders)", fillcolor="#9FE1CB", color="#0F6E56"];
+        CPDB [label="Client DB\n(Azure SQL)", shape=cylinder, fillcolor="#9FE1CB", color="#0F6E56"];
+    }
+
+    subgraph cluster_oms {
+        label="Order Management System  [conceptual]";
+        style="rounded,dashed,filled";
+        fillcolor="#F1EFE8";
+        color="#5F5E5A";
+        fontsize=12;
+        fontname="Helvetica-Bold";
+        OMS [label="Order allocation\nby price & inventory", fillcolor="#D3D1C7", color="#5F5E5A"];
+        OMSDB [label="Vendor DB", shape=cylinder, fillcolor="#D3D1C7", color="#5F5E5A"];
+    }
+
+    subgraph cluster_pms {
+        label="Product Management System  [conceptual]";
+        style="rounded,dashed,filled";
+        fillcolor="#F1EFE8";
+        color="#5F5E5A";
+        fontsize=12;
+        fontname="Helvetica-Bold";
+        PMS [label="Product CRUD +\nApproval Workflow", fillcolor="#D3D1C7", color="#5F5E5A"];
+        DataLake [label="Data Lake", shape=note, fillcolor="#D3D1C7", color="#5F5E5A"];
+        PMSDB [label="Product DB", shape=cylinder, fillcolor="#D3D1C7", color="#5F5E5A"];
+    }
+
+    Client -> CP;
+    CP -> CPDB;
+    CP -> OMS [label="New Order  (async)"];
+    OMS -> CP [label="Order Update  (async)", style=dashed];
+    CP -> PMS [label="Get Products  (sync)"];
+
+    Vendor -> OMS;
+    OMS -> OMSDB;
+    OMS -> PMS [label="Get Products  (sync)"];
+
+    Capturer -> PMS;
+    Manager -> PMS;
+    PMS -> PMSDB;
+    PMS -> DataLake;
+}

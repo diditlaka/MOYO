@@ -1,0 +1,75 @@
+digraph ClientPortalArchitecture {
+    rankdir=TB;
+    fontname="Helvetica";
+    bgcolor="white";
+    node [fontname="Helvetica", fontsize=11, shape=box, style="rounded,filled", margin="0.25,0.15"];
+    edge [fontname="Helvetica", fontsize=10, color="#5A5A5A"];
+
+    labelloc="t";
+    label="Client Portal — Architecture (Single Azure App Service)";
+    fontsize=16;
+    fontname="Helvetica-Bold";
+
+    Client [label="Client\n(Browser)", shape=oval, fillcolor="#E6F1FB", color="#185FA5"];
+
+    subgraph cluster_azure {
+        label="Azure App Service — moyo-ftg6h6cabjczexf7";
+        style="rounded,dashed";
+        color="#888780";
+        fontsize=12;
+        fontname="Helvetica-Bold";
+        labeljust="l";
+
+        subgraph cluster_presentation {
+            label="Presentation Layer";
+            style="rounded,filled";
+            fillcolor="#EEEDFE";
+            color="#534AB7";
+            fontsize=11;
+            Angular [label="Angular SPA\n(served from wwwroot)", fillcolor="#CECBF6", color="#534AB7"];
+        }
+
+        subgraph cluster_api {
+            label="API Layer (ASP.NET Core)";
+            style="rounded,filled";
+            fillcolor="#E1F5EE";
+            color="#0F6E56";
+            fontsize=11;
+            Controllers [label="Controllers\nAuthController · ProductsController · OrdersController", fillcolor="#9FE1CB", color="#0F6E56"];
+            Middleware [label="Middleware\nJWT Auth · Static Files · Routing", fillcolor="#9FE1CB", color="#0F6E56"];
+        }
+
+        subgraph cluster_business {
+            label="Business Logic Layer (Modules)";
+            style="rounded,filled";
+            fillcolor="#FAECE7";
+            color="#993C1D";
+            fontsize=11;
+            AuthService [label="AuthService\n(BCrypt hashing, JWT issuing)", fillcolor="#F5C4B3", color="#993C1D"];
+            ProductService [label="ProductService", fillcolor="#F5C4B3", color="#993C1D"];
+            OrderService [label="OrderService", fillcolor="#F5C4B3", color="#993C1D"];
+        }
+
+        subgraph cluster_data {
+            label="Data Access Layer";
+            style="rounded,filled";
+            fillcolor="#FBEAF0";
+            color="#993556";
+            fontsize=11;
+            EFCore [label="AppDbContext\n(Entity Framework Core)", fillcolor="#F4C0D1", color="#993556"];
+        }
+    }
+
+    SQL [label="Azure SQL Database\nMoyoClientPortal", shape=cylinder, fillcolor="#FAEEDA", color="#854F0B"];
+
+    Client -> Angular [label="HTTPS"];
+    Angular -> Middleware [label="/api/* (same origin)"];
+    Middleware -> Controllers;
+    Controllers -> AuthService;
+    Controllers -> ProductService;
+    Controllers -> OrderService;
+    AuthService -> EFCore;
+    ProductService -> EFCore;
+    OrderService -> EFCore;
+    EFCore -> SQL [label="TDS / Encrypted"];
+}
