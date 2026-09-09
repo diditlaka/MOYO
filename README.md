@@ -9,14 +9,6 @@
 
 ---
 
-## Live Demo
-
-**[moyo-ftg6h6cabjczexf7.southafricanorth-01.azurewebsites.net](https://moyo-ftg6h6cabjczexf7.southafricanorth-01.azurewebsites.net)**
-
-Frontend and backend are served from this single Azure App Service — no separate hosting for the UI.
-
----
-
 ## Overview
 
 The **Client Portal** is one system within MOYO's wider Online Order Solution, a three-system case study platform (Client Portal, Order Management System, Product Management System) built for the MOYO Graduate Programme.
