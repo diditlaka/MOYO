@@ -57,23 +57,16 @@ This repository implements the **Client Portal**: the system a client uses to re
 
 ![Client Portal architecture](docs/diagrams/client-portal-architecture.png)
 
-Editable source: [`docs/diagrams/client-portal-architecture.dot`](docs/diagrams/client-portal-architecture.dot) (Graphviz — open with `dot -Tpng client-portal-architecture.dot -o out.png`, or paste into [edotor.net](https://edotor.net)).
-
 ### The entire Online Order Solution
 
 The case study describes three cooperating systems — Client Portal, Order Management System, and Product Management System. This repository implements the Client Portal; OMS and PMS are documented at solution/context level below to cover the "entire solution" requirement.
 
 ![Entire solution architecture](docs/diagrams/solution-architecture.png)
 
-Editable source: [`docs/diagrams/solution-architecture.dot`](docs/diagrams/solution-architecture.dot).
 
 ### Entire Solution ERD
 
 ![Entire solution ERD](docs/diagrams/erd.png)
-
-Editable source: [`docs/diagrams/erd.dot`](docs/diagrams/erd.dot).
-
-`Client`, `Order`, and `Product` are the implemented entities backing this repository. `Vendor` is shown at conceptual level to represent how the Order Management System would allocate orders by price and inventory.
 
 ## Project Structure
 
