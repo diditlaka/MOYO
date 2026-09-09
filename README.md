@@ -55,18 +55,18 @@ This repository implements the **Client Portal**: the system a client uses to re
 
 ### This system — layered architecture
 
-![Client Portal architecture](docs/diagrams/client-portal-architecture.png)
+![Client Portal architecture](docs/diagrams/client-portal-architecture.svg)
 
 ### The entire Online Order Solution
 
 The case study describes three cooperating systems — Client Portal, Order Management System, and Product Management System. This repository implements the Client Portal; OMS and PMS are documented at solution/context level below to cover the "entire solution" requirement.
 
-![Entire solution architecture](docs/diagrams/solution-architecture.png)
+![Entire solution architecture](docs/diagrams/solution-architecture.svg)
 
 
 ### Entire Solution ERD
 
-![Entire solution ERD](docs/diagrams/erd.png)
+![Entire solution ERD](docs/diagrams/erd.svg)
 
 ## Project Structure
 
