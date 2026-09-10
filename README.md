@@ -155,4 +155,4 @@ If cloning this repo, set your own values using the commands above rather than e
 
 ---
 
-*Built for the MOYO Graduate Programme 2027 — Software Development Case Study*
+*Built for the MOYO Graduate Programme 2027-Software Development Case Study*
